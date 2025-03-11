@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - Peterboyz17 Jobs</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background-image: url('uploads/1.jpeg');
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .navbar img {
+      width: 60px;
+      height: 60px;
+      animation: spin 5s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 15px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar ul li {
+      display: inline;
+    }
+
+    .navbar ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: bold;
+      background-color: #00ccff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      transition: background-color 0.3s ease;
+    }
+
+    .navbar ul li a:hover {
+      background-color: #0099cc;
+    }
+
+    .dashboard-content {
+      text-align: center;
+      margin-top: 60px;
+      padding: 20px;
+    }
+
+    .dashboard-content h1 {
+      font-size: 2.5rem;
+      text-shadow: 2px 2px 5px #000;
+    }
+
+    .dashboard-content p {
+      font-size: 1.2rem;
+      text-shadow: 1px 1px 3px #000;
+    }
+
+    .home-button {
+      margin-top: 40px;
+      background-color: #00ccff;
+      padding: 10px 25px;
+      font-size: 16px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      color: #fff;
+      text-decoration: none;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    }
+
+    .home-button:hover {
+      background-color: #007ea8;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <img src="uploads/3.png" alt="Logo">
+    <ul>
+      <li><a href="dashboard.html">Home</a></li>
+      <li><a href="post_job.html">Post Job</a></li>
+      <li><a href="request_job.html">Request Job</a></li>
+      <li><a href="find_job.html">Find Job</a></li>
+      <li><a href="message_box.html">Message Box</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="login.html">Logout</a></li>
+    </ul>
+  </nav>
+
+  <div class="dashboard-content">
+    <h1>Welcome to Your Dashboard</h1>
+    <p>Connect, post jobs, request services, and manage your freelance profile with ease!</p>
+    
+    <a href="dashboard.html" class="home-button">Return to Home</a>
+  </div>
+
+</body>
+</html>
+<div class="chatbot-icon" onclick="toggleChatbot()">🤖</div>
+  <div id="chatbot" class="chatbot-box">
+    <div id="chat-log"></div>
+    <input type="text" id="chat-input" placeholder="Ask me something...">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <script src="chatbot.js"></script>
+</body>
+</html>

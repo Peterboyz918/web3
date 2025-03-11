@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Profile | Peterboyz17 Jobs</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Header Section with Logo & Tabs -->
+  <header class="main-header">
+    <div class="header-left">
+      <img src="uploads/3.png" alt="Logo" class="site-logo" />
+      <h1 class="site-title">Peterboyz17 Jobs</h1>
+    </div>
+    <nav class="navbar">
+      <a href="dashboard.html">Home</a>
+      <a href="find_job.html">Find Job</a>
+      <a href="message_box.html">Messages</a>
+      <a href="request_job.html">Request Job</a>
+      <a href="post_job.html">Post Job</a>
+      <a href="profile.html" class="active">Profile</a>
+      <a href="logout.html">Logout</a>
+    </nav>
+  </header>
+
+  <!-- Profile Content -->
+  <main class="container profile-container">
+    <h2>Manage Your Profile</h2>
+
+    <div class="profile-card">
+      <!-- Avatar Update Section -->
+      <section class="avatar-section">
+        <h3>Update Profile Picture</h3>
+        <img id="preview" src="uploads/default-avatar.png" alt="Profile Avatar" class="avatar-img">
+        <input type="file" id="avatar" accept="image/*">
+        <button class="btn" onclick="updateAvatar()">Save Avatar</button>
+      </section>
+
+      <!-- Password Update Section -->
+      <section class="password-section">
+        <h3>Change Password</h3>
+        <input type="password" id="oldPassword" placeholder="Old Password" />
+        <input type="password" id="newPassword" placeholder="New Password" />
+        <input type="password" id="confirmPassword" placeholder="Confirm New Password" />
+        <button class="btn" onclick="changePassword()">Update Password</button>
+      </section>
+    </div>
+  </main>
+
+  <!-- Chatbot Button + Box -->
+  <div class="chatbot-icon" onclick="toggleChatbot()">🤖</div>
+  <div id="chatbot" class="chatbot-box">
+    <div id="chat-log"></div>
+    <input type="text" id="chat-input" placeholder="Ask me anything..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <!-- JS Scripts -->
+  <script src="chatbot.js"></script>
+  <script>
+    document.getElementById("avatar").addEventListener("change", function () {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        document.getElementById("preview").src = e.target.result;
+        localStorage.setItem("userAvatar", e.target.result);
+      };
+      reader.readAsDataURL(this.files[0]);
+    });
+
+    window.onload = () => {
+      const avatar = localStorage.getItem("userAvatar");
+      if (avatar) {
+        document.getElementById("preview").src = avatar;
+      }
+    };
+
+    function updateAvatar() {
+      alert("Avatar updated successfully!");
+    }
+
+    function changePassword() {
+      const oldPass = document.getElementById("oldPassword").value;
+      const newPass = document.getElementById("newPassword").value;
+      const confirmPass = document.getElementById("confirmPassword").value;
+      const savedPass = localStorage.getItem("userPassword");
+
+      if (oldPass !== savedPass) {
+        alert("Incorrect old password.");
+        return;
+      }
+
+      if (newPass !== confirmPass) {
+        alert("New passwords do not match.");
+        return;
+      }
+
+      localStorage.setItem("userPassword", newPass);
+      alert("Password updated successfully.");
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Post Job | Peterboyz Jobs</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('uploads/1.jpeg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+    }
+
+    .navbar {
+      background: rgba(0, 0, 0, 0.85);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar img {
+      height: 50px;
+      animation: rotate 5s linear infinite;
+    }
+
+    .nav-links a {
+      color: #00ffd5;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .nav-links a:hover {
+      color: #ffffff;
+    }
+
+    .job-form-container {
+      background-color: rgba(0, 0, 0, 0.7);
+      margin: 50px auto;
+      padding: 30px;
+      max-width: 600px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #00ffd5;
+    }
+
+    .job-form-container h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #00ffd5;
+    }
+
+    .job-form-container input,
+    .job-form-container textarea,
+    .job-form-container button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .job-form-container input,
+    .job-form-container textarea {
+      background: #f0f0f0;
+      color: #333;
+    }
+
+    .job-form-container button {
+      background-color: #00ffd5;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .job-form-container button:hover {
+      background-color: #00a99d;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @media screen and (max-width: 600px) {
+      .nav-links {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <img src="uploads/3.png" alt="Logo" />
+    <div class="nav-links">
+      <a href="dashboard.html">Home</a>
+      <a href="post_job.html">Post Job</a>
+      <a href="request_job.html">Request Job</a>
+      <a href="find_job.html">Find Job</a>
+      <a href="profile.html">Profile</a>
+      <a href="login.html">Logout</a>
+    </div>
+  </div>
+
+  <div class="job-form-container">
+    <h2>Post a Job</h2>
+    <form id="postJobForm">
+      <input type="text" id="jobTitle" placeholder="Job Title" required />
+      <input type="text" id="jobCategory" placeholder="Category (e.g. Web Design, Writing)" required />
+      <textarea id="jobDescription" placeholder="Job Description" rows="5" required></textarea>
+      <input type="text" id="jobBudget" placeholder="Budget (e.g. $50, Ksh 5000)" required />
+      <button type="submit">Post Job</button>
+    </form>
+    <p id="postSuccess" style="text-align:center; color:limegreen;"></p>
+  </div>
+
+  <script>
+    const form = document.getElementById('postJobForm');
+    const successMsg = document.getElementById('postSuccess');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const job = {
+        title: document.getElementById('jobTitle').value,
+        category: document.getElementById('jobCategory').value,
+        description: document.getElementById('jobDescription').value,
+        budget: document.getElementById('jobBudget').value,
+        timestamp: new Date().toLocaleString()
+      };
+
+      let jobs = JSON.parse(localStorage.getItem('postedJobs')) || [];
+      jobs.push(job);
+      localStorage.setItem('postedJobs', JSON.stringify(jobs));
+
+      form.reset();
+      successMsg.textContent = "✅ Job posted successfully!";
+    });
+  </script>
+
+</body>
+</html>

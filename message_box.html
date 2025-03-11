@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Messages | Peterboyz17 Jobs</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Header with Tabs -->
+  <header class="main-header">
+    <div class="header-left">
+      <img src="uploads/3.png" alt="Logo" class="site-logo" />
+      <h1 class="site-title">Peterboyz17 Jobs</h1>
+    </div>
+    <nav class="navbar">
+      <li><a href="dashboard.html">Home</a></li>
+      <li><a href="post_job.html">Post Job</a></li>
+      <li><a href="request_job.html">Request Job</a></li>
+      <li><a href="find_job.html">Find Job</a></li>
+      <li><a href="message_box.html">Message Box</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="login.html">Logout</a></li>
+    </nav>
+  </header>
+
+  <!-- Messages Section -->
+  <main class="container">
+    <h2>Messages</h2>
+
+    <div class="message-section">
+      <h3>Send a Message</h3>
+      <input type="text" id="recipient" placeholder="Recipient Username" />
+      <textarea id="messageContent" placeholder="Write your message here..."></textarea>
+      <button class="btn" onclick="sendMessage()">Send Message</button>
+    </div>
+
+    <div class="message-section">
+      <h3>Sent Messages</h3>
+      <div id="sentMessages"></div>
+    </div>
+  </main>
+
+  <script>
+    function sendMessage() {
+      const recipient = document.getElementById('recipient').value.trim();
+      const content = document.getElementById('messageContent').value.trim();
+
+      if (!recipient || !content) {
+        alert("Please fill in both fields.");
+        return;
+      }
+
+      let messages = JSON.parse(localStorage.getItem("sentMessages")) || [];
+      messages.push({
+        recipient: recipient,
+        content: content,
+        timestamp: new Date().toLocaleString()
+      });
+
+      localStorage.setItem("sentMessages", JSON.stringify(messages));
+      alert("Message sent!");
+      document.getElementById("recipient").value = "";
+      document.getElementById("messageContent").value = "";
+      loadMessages();
+    }
+
+    function loadMessages() {
+      const messages = JSON.parse(localStorage.getItem("sentMessages")) || [];
+      const container = document.getElementById("sentMessages");
+      container.innerHTML = "";
+
+      if (messages.length === 0) {
+        container.innerHTML = "<p>No messages sent yet.</p>";
+        return;
+      }
+
+      messages.reverse().forEach(msg => {
+        const div = document.createElement("div");
+        div.classList.add("message-box");
+        div.innerHTML = `<strong>To:</strong> ${msg.recipient}<br><strong>Message:</strong> ${msg.content}<br><small>${msg.timestamp}</small>`;
+        container.appendChild(div);
+      });
+    }
+
+    window.onload = loadMessages;
+  </script>
+</body>
+</html>

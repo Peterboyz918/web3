@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Request a Job | Peterboyz17 Jobs</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="bg-image">
+
+  <!-- Logo -->
+  <div class="center-logo">
+    <img src="uploads/3.png" alt="Logo" class="logo-img" />
+  </div>
+
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <a href="dashboard.html">Home</a>
+    <a href="post_job.html">Post Job</a>
+    <a href="request_job.html" class="active">Request Job</a>
+    <a href="find_job.html">Find Job</a>
+    <a href="messages.html">Message Box</a>
+    <a href="profile.html">My Profile</a>
+    <a href="login.html">Logout</a>
+  </div>
+
+  <!-- Request Job Form -->
+  <div class="container">
+    <h2 class="form-heading">Request a Job</h2>
+    <form id="requestJobForm" class="job-form">
+      <input type="text" id="freelancerName" placeholder="Your Name" required />
+      <input type="text" id="requestedJobTitle" placeholder="Job Title You're Requesting" required />
+      <textarea id="freelancerMessage" placeholder="Write your request message to the client..." rows="5" required></textarea>
+      <button type="submit" class="btn">Send Request</button>
+    </form>
+
+    <a href="dashboard.html" class="return-btn">← Return Home</a>
+  </div>
+
+  <!-- Script to Store Job Requests -->
+  <script>
+    document.getElementById("requestJobForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById("freelancerName").value;
+      const title = document.getElementById("requestedJobTitle").value;
+      const message = document.getElementById("freelancerMessage").value;
+
+      const requests = JSON.parse(localStorage.getItem("jobRequests") || "[]");
+      requests.push({ name, title, message, timestamp: new Date().toLocaleString() });
+      localStorage.setItem("jobRequests", JSON.stringify(requests));
+
+      alert("Job request sent successfully!");
+      document.getElementById("requestJobForm").reset();
+    });
+  </script>
+
+</body>
+</html>
